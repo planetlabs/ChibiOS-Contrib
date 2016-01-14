@@ -400,6 +400,11 @@ typedef struct {
    *          pulse period capture event.
    */
   eicucallback_t          capture_cb;
+  /**
+   * @brief   Filter duration. It corresponds to the ICxF bits in the TIMx_CCMRx
+   *          register.
+   */
+  uint32_t filter;
 } EICUChannelConfig;
 
 /** 
