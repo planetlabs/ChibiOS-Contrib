@@ -404,6 +404,7 @@ static void start_channels(EICUDriver *eicup) {
       eicup->tim->CCER |= STM32_TIM_CCER_CC1E | STM32_TIM_CCER_CC1P;
 
     /* configure input filter duration */
+    eicup->tim->CCMR1 &= ~STM32_TIM_CCMR1_IC1F_MASK;
     eicup->tim->CCMR1 |= STM32_TIM_CCMR1_IC1F(eicup->config->iccfgp[0]->filter & 0xf);
   }
 
@@ -422,6 +423,7 @@ static void start_channels(EICUDriver *eicup) {
       eicup->tim->CCER |= STM32_TIM_CCER_CC2E | STM32_TIM_CCER_CC2P;
 
     /* configure input filter duration */
+    eicup->tim->CCMR1 &= ~STM32_TIM_CCMR1_IC2F_MASK;
     eicup->tim->CCMR1 |= STM32_TIM_CCMR1_IC2F(eicup->config->iccfgp[1]->filter & 0xf);
 
   }
@@ -441,7 +443,8 @@ static void start_channels(EICUDriver *eicup) {
       eicup->tim->CCER |= STM32_TIM_CCER_CC3E | STM32_TIM_CCER_CC3P;
 
     /* configure input filter duration */
-    eicup->tim->CCMR1 |= STM32_TIM_CCMR2_IC3F(eicup->config->iccfgp[2]->filter & 0xf);
+    eicup->tim->CCMR2 &= ~STM32_TIM_CCMR2_IC3F_MASK;
+    eicup->tim->CCMR2 |= STM32_TIM_CCMR2_IC3F(eicup->config->iccfgp[2]->filter & 0xf);
   }
 
   /* Input capture channel 4 (not for TIM 9 and 12) */
@@ -459,7 +462,8 @@ static void start_channels(EICUDriver *eicup) {
       eicup->tim->CCER |= STM32_TIM_CCER_CC4E | STM32_TIM_CCER_CC4P;
 
     /* configure input filter duration */
-    eicup->tim->CCMR1 |= STM32_TIM_CCMR2_IC4F(eicup->config->iccfgp[3]->filter & 0xf);
+    eicup->tim->CCMR2 &= ~STM32_TIM_CCMR2_IC4F_MASK;
+    eicup->tim->CCMR2 |= STM32_TIM_CCMR2_IC4F(eicup->config->iccfgp[3]->filter & 0xf);
 
   }
 }
